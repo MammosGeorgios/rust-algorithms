@@ -1,5 +1,5 @@
-mod dump;
 mod algorithm;
+mod dump;
 
 fn main() {
     println!("Hello algorithms in Rust!");
