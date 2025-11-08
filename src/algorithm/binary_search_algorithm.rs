@@ -4,13 +4,14 @@ pub fn binary_search_array(haystack: &[i32], needle: i32) -> bool {
     let mut high = haystack.len();
 
     while low < high {
-        let position = ((high - low) / 2) + low;
-        if haystack[position] == needle {
+        let middle_point = ((high - low) / 2) + low;
+        let value = haystack[middle_point];
+        if value == needle {
             return true;
-        } else if haystack[position] < needle {
-            low = position + 1
+        } else if value < needle {
+            low = middle_point + 1
         } else {
-            high = position
+            high = middle_point
         }
     }
 
@@ -44,6 +45,12 @@ mod test {
     #[rstest]
     fn missing_value_in_array(sorted_haystack: [i32; 11]) {
         assert_eq!(binary_search_array(&sorted_haystack, -1), false)
+    }
+
+    #[rstest]
+    fn single_element_array() {
+        let single_element_array = [42];
+        assert_eq!(binary_search_array(&single_element_array, 42), true);
     }
 
     #[rstest]
