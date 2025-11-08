@@ -63,23 +63,21 @@ mod test {
     }
 }
 
-// FUCKING WINDOWS WON'T BUILD THIS GOD DAMN PROPERTY TESTING
-// #[cfg(test)]
-// mod property_test {
-//     use crate::algorithm::binary_search_algorithm::binary_search_array;
-//     use prop_test::proptest;
-//     use prop_test::proptest::proptest;
-// 
-//     // Property testing my method!
-//     proptest! {
-//         #[test]
-//         fn property_testing(
-//             mut generated_vector in proptest::collection::vec(-1000..1000, 0..255),
-//             random_index in 0..255usize ){
-// 
-//             generated_vector.sort()
-//             // assert_eq!(true, true);
-//             assert_eq!(binary_search_array(&generated_vector, generated_vector[random_index]), true)
-//         }
-//     }
-// }
+#[cfg(test)]
+mod property_test {
+    use crate::algorithm::binary_search_algorithm::binary_search_array;
+    use prop_test::proptest;
+    use prop_test::proptest::proptest;
+
+    // Property testing my method!
+    proptest! {
+        #[test]
+        fn property_testing(
+            mut generated_vector in proptest::collection::vec(i32::MIN..i32::MAX, 1..10000)){
+            generated_vector.sort();
+            for i in 0usize..generated_vector.len(){
+                assert_eq!(binary_search_array(&generated_vector, generated_vector[i]), true)
+                }
+        }
+    }
+}
