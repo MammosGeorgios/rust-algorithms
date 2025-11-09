@@ -1,5 +1,6 @@
 mod algorithm;
 mod dump;
+mod data_structure;
 
 fn main() {
     println!("Hello algorithms in Rust!");
